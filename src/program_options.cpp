@@ -17,6 +17,10 @@ void read_options(int argc, char ** argv) {
   desc.add_options()
       // main
       ("help,h", "Display help message.")
+
+      // regexes
+      ("regex-size,r", po::value<int>()->default_value(3), "Regex size.")
+      ("secondary,s", "refine search by secondary file.")
   ;
 
   // positional options

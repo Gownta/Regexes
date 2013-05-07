@@ -1,5 +1,10 @@
 #include <iostream>
+#include <set>
+#include <string>
 #include "program_options.hpp"
+#include "regexes.hpp"
+#include "reader.hpp"
+#include "puzzler.hpp"
 using namespace std;
 
 int main(int argc, char ** argv) {
@@ -19,7 +24,15 @@ int main(int argc, char ** argv) {
     return 1;
   }
 
-  // Execute the lua scene.
+  // get regexes of interest
+  set<string> regexes = get_regexes();
+
+  // get words of interest
+  set<string> large = read_words(cmd_options()["source"].as<string>());
+  set<string> small = read_words(cmd_options()["check" ].as<string>());
+
+  // match
+  puzzle(regexes, large, small);
 
   return 0;
 }
