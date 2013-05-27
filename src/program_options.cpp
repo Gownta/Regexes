@@ -21,6 +21,9 @@ void read_options(int argc, char ** argv) {
       // regexes
       ("regex-size,r", po::value<int>()->default_value(3), "Regex size.")
       ("secondary,s", po::value<string>()/*->default_value("wordlists/top100k")*/, "Refine search by secondary file.")
+
+      // method
+      ("shape", "Find words of unique shape.")
   ;
 
   // positional options

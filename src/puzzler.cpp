@@ -1,6 +1,8 @@
 #include "puzzler.hpp"
 #include <iostream>
 #include <regex>
+#include <map>
+#include <ctype.h>
 #include "program_options.hpp"
 using namespace std;
 
@@ -65,6 +67,73 @@ void puzzle(const std::set<std::string> & regexes,
     auto firstc = first;
     for (int i = 0; i < num; ++i, ++firstc) cout << *firstc << " ";
     cout << endl;
+  }
+}
+
+void shape_puzzle(const std::set<std::string> & words) {
+  map<string, string> shapes;
+  const string invalid("INVALID");
+
+  for (const auto & word : words) {
+    // find the word's shape
+    // if the shape is already in the map, invalidate it
+    // else add the unique shape to the map
+
+    string shape;
+    shape.reserve(word.size());
+    for (char c : word) {
+      if (!islower(c)) {
+        shape = "";
+        break;
+      }
+
+      switch (c) {
+        case 'a':
+        case 'c':
+        case 'e':
+        case 'i': // ??
+        case 'm':
+        case 'n':
+        case 'o':
+        case 'r':
+        case 's':
+        case 'u':
+        case 'v':
+        case 'w':
+        case 'x':
+        case 'z':
+          shape.push_back('o');
+          break;
+
+        case 'b':
+        case 'd':
+        case 'f':
+        case 'h':
+        case 'k':
+        case 'l':
+        case 't':
+          shape.push_back('l');
+          break;
+
+        case 'g':
+        case 'j':
+        case 'p':
+        case 'q':
+        case 'y':
+          shape.push_back('p');
+          break;
+      }
+
+    }
+
+    if (shapes.count(shape) == 0) shapes[shape] = word;
+    else shapes[shape] = invalid;
+  }
+
+  for (const auto & kv : shapes) {
+    if (kv.second != invalid) {
+      cout << kv.first << "  \t" << kv.second << endl;
+    }
   }
 }
 

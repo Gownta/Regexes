@@ -24,16 +24,23 @@ int main(int argc, char ** argv) {
     return 1;
   }
 
-  // get regexes of interest
-  set<string> regexes = get_regexes();
+  if (cmd_options().count("shape")) {
+    // get the words of interest
+    set<string> words = read_words(cmd_options()["source"].as<string>());
 
-  // get words of interest
-  set<string> large = read_words(cmd_options()["source"   ].as<string>());
-  set<string> small;
-  if (cmd_options().count("secondary")) small = read_words(cmd_options()["secondary"].as<string>());
+    shape_puzzle(words);
+  } else {
+    // get regexes of interest
+    set<string> regexes = get_regexes();
 
-  // match
-  puzzle(regexes, large, small);
+    // get words of interest
+    set<string> large = read_words(cmd_options()["source"   ].as<string>());
+    set<string> small;
+    if (cmd_options().count("secondary")) small = read_words(cmd_options()["secondary"].as<string>());
+
+    // match
+    puzzle(regexes, large, small);
+  }
 
   return 0;
 }

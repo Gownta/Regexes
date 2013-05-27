@@ -8,5 +8,7 @@ void puzzle(const std::set<std::string> & regexes,
             const std::set<std::string> & large,
             const std::set<std::string> & small);
 
+void shape_puzzle(const std::set<std::string> & words);
+
 #endif // GOWNTA_PUZZLER_HPP
 
