@@ -13,8 +13,6 @@ void puzzle(const std::set<std::string> & regexes,
     // If there are 10+ consecutive matches, or 2 non-consecutive matches,
     // continue.
 
-    //cout << "testing regex " << reg << "\t    ";
-
     regex rgx(reg); // regex
     bool good = true; // is this regex interesting
 
@@ -26,7 +24,6 @@ void puzzle(const std::set<std::string> & regexes,
       const auto & str = *it;
       if (regex_match(str, rgx)) {
         if (passed == true) {
-          //cout << "already passed the main group ";
           good = false;
           break;
         }
@@ -35,17 +32,14 @@ void puzzle(const std::set<std::string> & regexes,
 
         num++;
         if (num > 10) {
-          //cout << "too many consecutive ";
           good = false;
           break;
         }
       } else if (num > 0) {
-        //if (!passed) cout << "passed " << num << " ";
         passed = true;
       }
     }
 
-    //cout << "num matches = " << num << "  (good = " << good << ")" << endl;
     if (!good || num == 0) continue;
 
     // now that we have a (potentially) good regex, make sure that the matched

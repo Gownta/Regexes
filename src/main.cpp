@@ -17,7 +17,7 @@ int main(int argc, char ** argv) {
               "     njormrod@\n"
             "\n     =========================\n\n";
 
-    cout << "Usage: puzzler [options] [source] [check] \n\n";
+    cout << "Usage: puzzler [options] [source]\n\n";
 
     print_options();
 
@@ -28,8 +28,9 @@ int main(int argc, char ** argv) {
   set<string> regexes = get_regexes();
 
   // get words of interest
-  set<string> large = read_words(cmd_options()["source"].as<string>());
-  set<string> small = read_words(cmd_options()["check" ].as<string>());
+  set<string> large = read_words(cmd_options()["source"   ].as<string>());
+  set<string> small;
+  if (cmd_options().count("secondary")) small = read_words(cmd_options()["secondary"].as<string>());
 
   // match
   puzzle(regexes, large, small);

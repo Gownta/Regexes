@@ -20,18 +20,16 @@ void read_options(int argc, char ** argv) {
 
       // regexes
       ("regex-size,r", po::value<int>()->default_value(3), "Regex size.")
-      ("secondary,s", "refine search by secondary file.")
+      ("secondary,s", po::value<string>()/*->default_value("wordlists/top100k")*/, "Refine search by secondary file.")
   ;
 
   // positional options
   po::positional_options_description pos;
   pos.add("source", 1);
-  pos.add("check", 2);
 
   po::options_description dpos("Positionals");
   dpos.add_options()
-      ("source", po::value<string>()->default_value("top100k"), "Source dictionary.")
-      ("check",  po::value<string>()->default_value("top5k"),   "Pruning dictionary.")
+      ("source", po::value<string>()->default_value("wordlists/top100k"), "Source dictionary.")
   ;
 
   // parse the command line

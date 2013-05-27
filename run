@@ -47,8 +47,8 @@ echo "Updating build/ directory"
 echo
 
 mkdir -p build
-cp -ruf src/*  build
-cp -ruf wordlists/*  build
+cp -ruf src/* build
+cp -ruf wordlists build
 
 echo
 
